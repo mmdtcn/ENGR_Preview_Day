@@ -17,9 +17,7 @@ PulseSensorPlayground pulseSensor;
 
 //Configure Serial Monitor
 void setup() {   
-
-  Serial.begin(9600);    
-  
+  Serial.begin(9600);     
   pinMode(2, OUTPUT);
 
   // Configure PulseSensor 
@@ -27,16 +25,11 @@ void setup() {
   pulseSensor.blinkOnPulse(LED);       
   pulseSensor.setThreshold(Threshold);   
   digitalWrite(2, LOW); // turn the LED on (HIGH is the voltage level)
-  if (pulseSensor.begin()){
-
-    
+  if (pulseSensor.begin()){  
   }
  
 }
-
-
 void loop() {
-
 
 if (pulseSensor.sawStartOfBeat()) {            
  int myBPM = pulseSensor.getBeatsPerMinute();  
@@ -49,7 +42,6 @@ if (pulseSensor.sawStartOfBeat()) {
    
 }
  
-  delay(20);    
-       
+  delay(20);     
 
 }
