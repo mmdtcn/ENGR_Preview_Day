@@ -95,9 +95,6 @@ if (pulseSensor.sawStartOfBeat()) {
   digitalWrite(pulse_LED, LOW); 
   }
 }
- 
- delay(20);    
+delay(20);    
 
-}
-
-  
+}  
