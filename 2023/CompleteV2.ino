@@ -1,6 +1,6 @@
 
 /*  ********************************************************************************
- *  Monitor Heart Rate using Pulse sensor and Distnace Detector using ultrasonic
+ *  Monitor Heart Rate using Pulse sensor and Distance Detector using ultrasonic
  *
 */
 
