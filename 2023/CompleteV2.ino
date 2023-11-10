@@ -1,6 +1,6 @@
 
 /*  ********************************************************************************
- *  Monitor Heart Rate using Pulse sensor and Distance Detector using ultrasonic
+ *  Monitor Heart Rate using Pulse sensor and Distnace Detector using ultrasonic
  *
 */
 
@@ -22,7 +22,9 @@ const int ultrasonic_LED = 3;
 const int PulseWire = 0;       
 const int LED = LED_BUILTIN;          
 
-int Threshold = 500;           
+int sw_plot_signal = 0;
+int Threshold = 600;  
+
                            
 PulseSensorPlayground pulseSensor;  
 
@@ -30,14 +32,14 @@ void init_ultrasonic()
 {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  pinMode(pulse_LED, OUTPUT);   // PIN 2 is LED for pulse sensor
-  pinMode(3, OUTPUT);   // PIN 3 is LED for ultrasonic sensor
+  pinMode(ultrasonic_LED, OUTPUT);   // PIN 3 is LED for ultrasonic sensor
 
 }
 
 
 void init_pulse_sensor()
 {
+  pinMode(pulse_LED, OUTPUT);   // PIN 2 is LED for pulse sensor
     // Configure PulseSensor 
   pulseSensor.analogInput(PulseWire);   
   pulseSensor.blinkOnPulse(LED);       
@@ -82,19 +84,28 @@ void loop() {
   {
     digitalWrite(ultrasonic_LED, LOW);  
   }
+  
+  if (sw_plot_signal ==1){
+  int signal = analogRead(PulseWire);
+  Serial.println(signal); 
+  }
+
+
 if (pulseSensor.sawStartOfBeat()) {            
  int myBPM = pulseSensor.getBeatsPerMinute();  
- Serial.println(myBPM);   
+ if (sw_plot_signal ==0)
+   Serial.println(myBPM);   
 // If the average heart rate is higher than 100, it turns the LED on 
  if (myBPM>100){
   digitalWrite(pulse_LED, HIGH); 
-  delay(500);
+  //delay(500);
   }
   else 
   {
   digitalWrite(pulse_LED, LOW); 
   }
 }
-delay(20);    
+ 
+ delay(20);    
 
-}  
+}
